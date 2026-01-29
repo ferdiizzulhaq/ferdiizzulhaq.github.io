@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferdi Izzulhaq | Bapak² Millenial & Tech Enthusiast</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Link Font: Inter Variable (Mendukung fitur OpenType) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
         /* --- VARIABLE WARNA & FONT --- */
@@ -22,25 +24,36 @@
             --accent-green-tint: rgba(100, 255, 218, 0.1);
             --spotlight-color: rgba(29, 78, 216, 0.15);
             
-            /* Font Variable */
+            /* Stack Font Modern */
             --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-        /* --- RESET & GLOBAL --- */
+        /* --- RESET & GLOBAL SETTINGS --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
+        html {
             font-family: var(--font-main);
+            /* --- AKTIVASI FITUR OPENTYPE (PENTING) ---
+               cv11: Mengubah huruf 'a' menjadi bulat (Single-story a)
+               ss03: Mengubah huruf 'r' menjadi melengkung (Curved r)
+               cv02: Variasi karakter (biasanya angka/huruf besar tertentu)
+            */
+            font-feature-settings: "cv11", "ss03", "cv02";
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
             background-color: var(--bg-navy);
             color: var(--text-slate);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        /* Paksa Font Inter pada elemen spesifik untuk memastikan override */
-        h1, h2, h3, h4, h5, h6, button, input, textarea, a, p, span, div {
-            font-family: var(--font-main);
+        /* Paksa semua elemen mewarisi settingan font (cv11) */
+        button, input, textarea, select, h1, h2, h3, h4, h5, h6, a, p, span, strong, div {
+            font-family: inherit;
+            font-feature-settings: inherit;
         }
 
         /* Spotlight Effect Container */
