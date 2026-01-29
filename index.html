@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hei, Ferdi!</title>
+    <title>Ferdi Izzulhaq | Tech Enthusiast</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- 1. PERBAIKAN: Gunakan CDN Resmi Inter (rsms.me) bukan Google Fonts -->
-    <!-- Google Fonts sering membuang fitur OpenType (seperti cv11) untuk menghemat size -->
+    <!-- 1. PENGGUNAAN FONT INTER YANG BENAR (CDN rsms.me) -->
+    <!-- Mendukung Variable Font & OpenType Features agar terlihat "Mahal" -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     
     <style>
@@ -31,22 +31,23 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         html {
+            scroll-behavior: smooth; /* Menambahkan efek scroll halus */
             font-family: var(--font-main);
             
-            /* --- FITUR OPENTYPE (Sekarang pasti jalan dengan rsms.me) --- */
+            /* --- FITUR OPENTYPE (Agar font terlihat seperti website startup modern) --- */
             /* cv11: Huruf 'a' bulat (Single-story) */
             /* ss03: Huruf 'r' melengkung */
-            /* cv02: Variasi angka/huruf tertentu */
-            font-feature-settings: "cv11", "ss03", "cv02";
+            font-feature-settings: "cv11", "ss03";
             
-            /* Dukungan untuk browser lama yang menggunakan sintaks berbeda */
-            -webkit-font-feature-settings: "cv11", "ss03", "cv02";
+            /* Dukungan untuk browser lama */
+            -webkit-font-feature-settings: "cv11", "ss03";
             
+            /* Antialiasing agar teks tajam di background gelap */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Support khusus untuk Inter Variable dari rsms.me */
+        /* Support khusus untuk Inter Variable */
         @supports (font-variation-settings: normal) {
             html { font-family: 'Inter var', sans-serif; }
         }
@@ -55,46 +56,43 @@
             background-color: var(--bg-navy);
             color: var(--text-slate);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
         }
 
-        /* Pastikan settingan menurun ke semua elemen */
-        button, input, textarea, select, h1, h2, h3, h4, h5, h6, a, p, span, strong, div, li {
-            font-family: inherit;
-            font-feature-settings: inherit;
-            -webkit-font-feature-settings: inherit;
-        }
-
-        /* Spotlight Effect Container */
+        /* Spotlight Effect Container (Background Glow) */
         .spotlight {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            background: radial-gradient(600px at 0px 0px, var(--spotlight-color), transparent 80%);
-            z-index: 10;
+            pointer-events: none; /* Agar klik tembus ke bawah */
+            background: radial-gradient(600px at 50% 50%, var(--spotlight-color), transparent 80%);
+            z-index: 10; /* Di atas background, di bawah konten */
+            opacity: 0; /* Hidden default, muncul via JS */
+            transition: opacity 0.5s ease;
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.2s ease-in-out; }
         
-        /* --- LAYOUT --- */
+        /* --- LAYOUT UTAMA --- */
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 20; /* Konten di atas spotlight */
         }
 
         @media (min-width: 1024px) {
             .layout {
                 display: grid;
-                grid-template-columns: 45% 55%;
-                gap: 48px;
+                grid-template-columns: 40% 60%; /* Rasio Kiri : Kanan */
+                gap: 40px;
             }
         }
 
-        /* --- LEFT SIDE (STICKY) --- */
+        /* --- BAGIAN KIRI (STICKY HEADER) --- */
         header {
             padding: 48px 0;
         }
@@ -111,37 +109,28 @@
             }
         }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--accent-green);
-            margin-bottom: 24px;
-            object-fit: cover;
-            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 3rem);
+        .profile-section h1 {
+            font-size: clamp(2.5rem, 5vw, 3rem); /* Responsif font size */
             font-weight: 700;
             color: var(--white);
             letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
         }
 
         .headline {
             font-size: 1.25rem;
             color: var(--text-light);
             font-weight: 500;
-            margin-top: 12px;
+            margin-bottom: 1.5rem;
         }
 
         .short-bio {
-            max-width: 320px;
-            margin-top: 16px;
+            max-width: 300px;
             font-size: 1rem;
+            color: var(--text-slate);
         }
 
-        /* --- NAV LINKS --- */
+        /* --- NAVIGASI MENU (Kiri) --- */
         .nav-menu {
             display: none;
             margin-top: 64px;
@@ -161,25 +150,26 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-slate);
+            cursor: pointer;
         }
 
         .nav-line {
-            width: 32px;
+            width: 30px;
             height: 1px;
             background-color: var(--text-slate);
             transition: all 0.3s ease;
         }
 
+        /* Efek saat Nav Item Aktif/Hover */
         .nav-item:hover, .nav-item.active {
             color: var(--white);
         }
-
         .nav-item:hover .nav-line, .nav-item.active .nav-line {
-            width: 64px;
+            width: 60px;
             background-color: var(--white);
         }
 
-        /* --- SOCIALS --- */
+        /* --- SOCIAL ICONS --- */
         .socials {
             display: flex;
             gap: 24px;
@@ -188,11 +178,11 @@
         }
 
         .socials a:hover {
-            color: var(--white);
+            color: var(--accent-green);
             transform: translateY(-3px);
         }
 
-        /* --- RIGHT SIDE (SCROLLABLE) --- */
+        /* --- BAGIAN KANAN (SCROLLABLE CONTENT) --- */
         main {
             padding: 48px 0;
         }
@@ -203,16 +193,17 @@
 
         section {
             margin-bottom: 96px;
-            scroll-margin-top: 96px;
+            scroll-margin-top: 96px; /* Jarak aman saat di-klik dari menu */
         }
 
+        /* Header kecil untuk tampilan Mobile */
         .mobile-section-header {
             position: sticky;
             top: 0;
             z-index: 20;
-            background-color: rgba(10, 25, 47, 0.75);
-            backdrop-filter: blur(8px);
-            padding: 16px 0;
+            background-color: rgba(10, 25, 47, 0.85); /* Glass effect */
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
             margin-bottom: 24px;
             color: var(--white);
             font-weight: 700;
@@ -225,48 +216,44 @@
             .mobile-section-header { display: none; }
         }
 
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            color: var(--text-slate);
-        }
-
-        strong { color: var(--text-light); font-weight: 500; }
+        p { margin-bottom: 1.5rem; }
+        strong { color: var(--text-light); font-weight: 600; }
 
         /* --- PROJECT CARDS --- */
         .project-card {
             display: block;
             padding: 24px;
             border-radius: 8px;
-            margin-bottom: 12px;
-            border: 1px solid transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 16px;
+            border: 1px solid transparent; /* Invisible border */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @media (min-width: 640px) {
-            .project-card:hover {
-                background-color: rgba(255, 255, 255, 0.03);
-                border-color: rgba(255, 255, 255, 0.1);
-                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-            }
+        /* Efek Hover Card */
+        .project-card:hover {
+            background-color: rgba(255, 255, 255, 0.05); /* Light highlight */
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .project-title {
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 8px;
+            transition: color 0.3s;
         }
 
         .project-card:hover .project-title {
-            color: var(--accent-green);
+            color: var(--accent-green); /* Judul jadi hijau saat hover */
         }
 
         .project-desc {
-            font-size: 0.875rem;
+            font-size: 0.95rem;
+            color: var(--text-slate);
             margin-bottom: 16px;
         }
 
@@ -283,33 +270,53 @@
             font-weight: 500;
             padding: 4px 12px;
             border-radius: 9999px;
+            line-height: 1.5;
         }
 
+        /* --- FOOTER --- */
         footer {
-            margin-top: 120px;
-            font-size: 0.675rem;
-            max-width: 400px;
+            margin-top: 100px;
+            font-size: 0.8rem;
+            color: var(--text-slate);
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        footer a:hover {
+            color: var(--accent-green);
         }
     </style>
 </head>
 <body>
 
-    <!-- Mouse Spotlight -->
+    <!-- Mouse Spotlight Element -->
     <div class="spotlight" id="spotlight"></div>
 
     <div class="container">
         <div class="layout">
             
-            <!-- LEFT SIDE -->
+            <!-- LEFT SIDE (FIXED) -->
             <header>
-                <div>
-                    <img src="https://lh3.googleusercontent.com/a/ACg8ocKvkKbCMLt_TWIecLb8EzcfC1q0e3TGwFpZjlf3wIFkGqWwMyqLHQ=s288-c-no" alt="Foto Ferdi" class="profile-img">
+                <div class="profile-section">
+                    <!-- Foto Profil -->
+                    <!-- Tips: Gunakan style display:block agar margin-bottom berfungsi baik -->
+                    <img src="https://github.com/ferdiizzulhaq.png" 
+                         alt="Foto Ferdi" 
+                         style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--accent-green); margin-bottom: 24px; display: block; object-fit: cover;">
+                    
                     <h1>Ferdi Izzulhaq</h1>
                     <div class="headline">Bapak² Millenial & Tech Enthusiast</div>
+                    
                     <p class="short-bio">
                         Membangun solusi digital fungsional untuk memudahkan pekerjaan dan menyalurkan hobi eksplorasi teknologi.
                     </p>
 
+                    <!-- Desktop Nav -->
                     <nav class="nav-menu">
                         <a href="#about" class="nav-item active" data-sec="about">
                             <span class="nav-line"></span> TENTANG
@@ -323,17 +330,19 @@
                     </nav>
                 </div>
 
+                <!-- Social Icons -->
                 <div class="socials">
-                    <a href="https://github.com/ferdiizzulhaq/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/ferdiannasrudin/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/ferdiizzulhaq/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="mailto:ferdiizzulhaq@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/ferdiizzulhaq" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/ferdiizzulhaq" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://instagram.com/ferdiizzulhaq" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:ferdiizzulhaq@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </header>
 
-            <!-- RIGHT SIDE -->
+            <!-- RIGHT SIDE (SCROLLABLE) -->
             <main>
-                <!-- About Section -->
+                
+                <!-- 1. ABOUT SECTION -->
                 <section id="about">
                     <div class="mobile-section-header">Tentang</div>
                     <p>
@@ -349,30 +358,30 @@
                     </p>
                 </section>
 
-                <!-- Projects Section -->
+                <!-- 2. PROJECTS SECTION -->
                 <section id="projects">
                     <div class="mobile-section-header">Proyek</div>
 
                     <!-- Project 1 -->
                     <a href="#" class="project-card">
                         <div class="project-title">
-                            AI Script Master <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i>
+                            AI Script Master <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
                         </div>
                         <p class="project-desc">
                             Aplikasi desktop otomatisasi workflow marketing. Mengambil data dari poster fisik via OCR, lalu secara cerdas menghasilkan variasi copywriting untuk Facebook Ads dan WhatsApp Marketing.
                         </p>
                         <div class="tech-list">
                             <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Tesseract</span>
-                            <span class="tech-tag">Gemini AI</span>
-                            <span class="tech-tag">Custom UI</span>
+                            <span class="tech-tag">Tesseract OCR</span>
+                            <span class="tech-tag">Gemini API</span>
+                            <span class="tech-tag">Tkinter</span>
                         </div>
                     </a>
 
                     <!-- Project 2 -->
                     <a href="#" class="project-card">
                         <div class="project-title">
-                            Doukutsu Monogatari ID <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i>
+                            Doukutsu Monogatari ID <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
                         </div>
                         <p class="project-desc">
                             Proyek lokalisasi bahasa untuk game indie legendaris Cave Story. Melibatkan modifikasi resource file, perbaikan font rendering, dan manajemen script dialog agar sesuai konteks lokal.
@@ -380,26 +389,28 @@
                         <div class="tech-list">
                             <span class="tech-tag">Reverse Engineering</span>
                             <span class="tech-tag">TSC Script</span>
-                            <span class="tech-tag">Translation</span>
+                            <span class="tech-tag">Hex Editing</span>
                         </div>
                     </a>
 
                     <!-- Project 3 -->
                     <a href="#" class="project-card">
                         <div class="project-title">
-                            Nasi Pecel Digital <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i>
+                            Nasi Pecel Digital <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
                         </div>
                         <p class="project-desc">
                             Framework perhitungan harga jual otomatis untuk platform online (Grab/Gojek). Membantu pemilik bisnis lokal menentukan profit margin yang tepat setelah dipotong komisi platform.
                         </p>
                         <div class="tech-list">
-                            <span class="tech-tag">Excel/Sheets</span>
+                            <span class="tech-tag">Google Sheets</span>
                             <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Digital Pricing</span>
                         </div>
                     </a>
+
                 </section>
 
-                <!-- Writing Section -->
+                <!-- 3. WRITING SECTION -->
                 <section id="writing">
                     <div class="mobile-section-header">Tulisan</div>
                     <p>
@@ -410,33 +421,42 @@
                     </p>
                 </section>
 
-                <footer style="font-size: 0.8rem; margin-top: 50px; color: var(--text-slate);">
+                <!-- FOOTER -->
+                <footer>
                     <p>
-                        Terinspirasi oleh <a href="https://brittanychiang.com" target="_blank" style="color: var(--white); border-bottom: 1px solid transparent; border-color: var(--white);">Brittany Chiang</a>. Dibuat dengan <i>clean code</i> ✨, semangat belajar 🔥, dan kopi ☕.
+                        Terinspirasi oleh <a href="https://brittanychiang.com" target="_blank">Brittany Chiang</a>. 
+                        Dibuat dengan <i>clean code</i> ✨, semangat belajar 🔥, dan kopi ☕.
                     </p>
                 </footer>
-            </main>
 
+            </main>
         </div>
     </div>
 
+    <!-- JAVASCRIPT: Logic untuk Spotlight & Navigasi -->
     <script>
-        // Efek Spotlight Cursor
+        // 1. Efek Spotlight Cursor (Hanya aktif di Desktop)
         const spotlight = document.getElementById('spotlight');
-        window.addEventListener('mousemove', e => {
+        
+        document.addEventListener('mousemove', (e) => {
+            // Ubah opacity jadi 1 saat mouse bergerak
+            spotlight.style.opacity = '1';
+            // Pindahkan gradient ke posisi mouse
             spotlight.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, var(--spotlight-color), transparent 80%)`;
         });
 
-        // Auto Active Nav Link saat Scroll
+        // 2. Fitur "Scroll Spy" (Menu aktif otomatis saat discroll)
         const sections = document.querySelectorAll('section');
         const navItems = document.querySelectorAll('.nav-item');
 
         window.addEventListener('scroll', () => {
             let current = '';
+            
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
+                // Logika: Jika scroll sudah mencapai 1/3 dari section tsb
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
                     current = section.getAttribute('id');
                 }
             });
