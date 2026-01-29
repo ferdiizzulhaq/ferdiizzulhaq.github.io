@@ -6,6 +6,11 @@
     <title>Ferdi Izzulhaq</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* --- VARIABLE WARNA (Palette Brittany Chiang) --- */
@@ -20,12 +25,18 @@
         /* --- RESET & GLOBAL --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-navy);
-            color: var(--text-slate);
-            line-height: 1.6;
-        }
+    body {
+    /* Prioritas: Pakai Inter -> Kalau gagal, pakai font sistem Apple -> Kalau gagal, pakai sans-serif biasa */
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    
+    background-color: var(--bg-navy);
+    color: var(--text-slate);
+    line-height: 1.6;
+    
+    /* Fitur agar font Inter terlihat lebih tajam (antialiasing) */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         a:hover { color: var(--accent-green); }
