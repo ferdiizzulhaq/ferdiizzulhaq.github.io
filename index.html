@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS (Bagian Desain) --- */
+        :root {
+            --primary-color: #2563eb; /* Warna Utama (Biru) */
+            --bg-color: #0f172a;      /* Warna Latar (Gelap) */
+            --text-color: #f8fafc;    /* Warna Teks (Putih) */
+            --card-bg: #1e293b;       /* Warna Kotak Proyek */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section (Profil) */
+        header {
+            padding: 60px 20px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .subtitle { color: #94a3b8; font-size: 1.2rem; margin-bottom: 30px; }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); opacity: 0.9; }
+
+        /* Social Media Icons */
+        .social-links { margin-top: 20px; }
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+        .social-links a:hover { color: var(--primary-color); }
+
+        /* Projects Section */
+        .section-title {
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding-bottom: 5px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 { margin-top: 0; color: var(--primary-color); }
+        .card a { color: #fff; text-decoration: underline; font-size: 0.9rem;}
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-img">
+            
+            <h1>Nama Kamu</h1>
+            <p class="subtitle">Mahasiswa | Web Developer | Suka Kopi</p>
+            
+            <a href="mailto:emailmu@gmail.com" class="btn">Hubungi Saya</a>
+
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </header>
+
+        <h2 class="section-title">Proyek Saya</h2>
+        <div class="projects-grid">
+            
+            <div class="card">
+                <h3>Website Toko Online</h3>
+                <p>Membuat desain front-end sederhana untuk toko sepatu menggunakan HTML dan CSS.</p>
+                <a href="#">Lihat Project &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>Aplikasi To-Do List</h3>
+                <p>Aplikasi pencatat tugas harian sederhana berbasis Python CLI.</p>
+                <a href="#">Lihat Project &rarr;</a>
+            </div>
+
+             <div class="card">
+                <h3>Desain UI/UX</h3>
+                <p>Eksplorasi desain aplikasi mobile untuk pemesanan makanan sehat.</p>
+                <a href="#">Lihat Project &rarr;</a>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Dibuat dengan ❤️ oleh Nama Kamu.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
