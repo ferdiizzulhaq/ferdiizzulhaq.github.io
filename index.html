@@ -112,7 +112,7 @@
         <header>
             <img src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-img">
             
-            <h1>Nama Kamu</h1>
+            <h1>Ferdi Izzulhaq</h1>
             <p class="subtitle">Mahasiswa | Web Developer | Suka Kopi</p>
             
             <a href="mailto:emailmu@gmail.com" class="btn">Hubungi Saya</a>
@@ -149,7 +149,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2024 Dibuat dengan ❤️ oleh Nama Kamu.</p>
+            <p>&copy; 2024 Dibuat dengan ❤️ oleh Ferdi Izzulhaq.</p>
         </footer>
     </div>
 
